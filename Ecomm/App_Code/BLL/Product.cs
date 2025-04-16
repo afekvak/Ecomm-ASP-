@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Web;
 
 
@@ -15,6 +16,8 @@ namespace BLL
         public float Price { get; set; }
         public string Picname { get; set; }
         public int Cid { get; set; }
+
+        public string Status { get; set; }
         public int Quantity { get; set; }
 
         public static Product GetById(int Pid)
@@ -29,7 +32,7 @@ namespace BLL
 
         public int Save()
         {
-            return 0;
+            return ProductDAL.Save(this);
         }  
         
         public static int DeleteById(int Pid)

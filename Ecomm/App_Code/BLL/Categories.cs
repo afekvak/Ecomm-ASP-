@@ -25,12 +25,12 @@ namespace BLL
 
         public int Save()
         {
-            return 0;
+            return CategoriesDAL.Save(this);
         }
 
         public static int DeleteById(int Cid)
         {
-            return CategoriesDAL.DeleteById(Cid); 
+            return CategoriesDAL.DeleteById(Cid);
         }
 
 

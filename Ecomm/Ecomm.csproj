@@ -92,6 +92,7 @@
     <Compile Include="App_Code\DAL\OrdersDAL.cs" />
     <Compile Include="App_Code\DAL\ProductDAL.cs" />
     <Compile Include="App_Code\DAL\UsersDAL.cs" />
+    <Compile Include="App_Code\DbContext.cs" />
     <Compile Include="Error.aspx.cs">
       <DependentUpon>Error.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

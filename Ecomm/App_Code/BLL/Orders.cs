@@ -26,7 +26,7 @@ namespace BLL
 
         public int Save()
         {
-            return 0;
+            return OrdersDAL.Save(this);
         }
 
         public static int DeleteById(int OrderId)
@@ -35,5 +35,5 @@ namespace BLL
         }
     }
 
-
+    ///
 }

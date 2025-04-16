@@ -28,12 +28,12 @@ namespace BLL
 
         public int Save()
         {
-            return 0;
+            return UsersDAL.Save(this);
         }
 
-        public static int DeleteById(int Pid)
+        public static int DeleteById(int Uid)
         {
-            return UsersDAL.DeleteById(Pid);
+            return UsersDAL.DeleteById(Uid);
         }
 
 
