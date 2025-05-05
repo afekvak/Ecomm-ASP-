@@ -84,7 +84,7 @@ namespace DAL
         public static Categories GetById(int Cid)
         {
             DbContext db = new DbContext();
-            string query = $"SELECT * FROM T.Category WHERE Cid = {Cid}";
+            string query = $"SELECT * FROM T_Category WHERE Cid = {Cid}";
 
             DataTable dt = db.Execute(query);
 
@@ -107,7 +107,7 @@ namespace DAL
         public static List<Categories> GetAll()
         {
             DbContext db = new DbContext();
-            string query = "SELECT * FROM T.Category";
+            string query = "SELECT * FROM T_Category";
             DataTable dt = db.Execute(query);
             List<Categories> list = new List<Categories>();
             for (int i = 0; i < dt.Rows.Count; i++)
@@ -127,7 +127,7 @@ namespace DAL
         public static int DeleteById(int Cid)
         {
             DbContext db = new DbContext();
-            string query = $"Delete FROM T.Category WHERE Cid = {Cid}";
+            string query = $"Delete FROM T_Category WHERE Cid = {Cid}";
             int i = db.ExecuteNonQuery(query);
             db.Close();
             return i;

@@ -20,7 +20,7 @@ namespace BLL
 
         public static List<Categories> GetAll()
         {
-            return new List<Categories>();
+            return CategoriesDAL.GetAll();
         }
 
         public int Save()

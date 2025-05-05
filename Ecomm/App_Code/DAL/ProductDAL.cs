@@ -17,7 +17,7 @@ namespace DAL
         public static Product GetById(int Pid)
         {
             DbContext db = new DbContext();
-            string query = $"SELECT * FROM T.Product WHERE Pid = {Pid}";
+            string query = $"SELECT * FROM T_Product WHERE Pid = {Pid}";
 
             DataTable dt = db.Execute(query);
             
@@ -26,13 +26,12 @@ namespace DAL
             {
                 temp = new Product()
                 {
-                    Pid =(int) dt.Rows[0]["Pid"],
+                    Pid = Convert.ToInt32(dt.Rows[0]["Pid"]),
                     Pname = (string)dt.Rows[0]["Pname"],
                     Pdesc = (string)dt.Rows[0]["Pdesc"],
-                    Price = (float)dt.Rows[0]["Price"],
+                    Price = Convert.ToSingle(dt.Rows[0]["Price"]),
                     Picname = (string)dt.Rows[0]["Picname"],
-                    Cid = (int)dt.Rows[0]["Cid"],
-                    Quantity = (int)dt.Rows[0]["Quantity"]
+                    Cid = Convert.ToInt32(dt.Rows[0]["Cid"]),
                 };
 
                 db.Close();
@@ -45,20 +44,19 @@ namespace DAL
         public static List<Product> GetAll()
         {
             DbContext db = new DbContext();
-            string query = "SELECT * FROM T.Product";
+            string query = "SELECT * FROM T_Product";
             DataTable dt = db.Execute(query);
             List<Product> list = new List<Product>();
             for (int i = 0; i < dt.Rows.Count; i++)
             {
                 Product tmp = new Product()
                 {
-                    Pid = (int)dt.Rows[i]["Pid"],
-                    Pname = (string)dt.Rows[i]["Pname"],
-                    Pdesc = (string)dt.Rows[i]["Pdesc"],
-                    Price = (float)dt.Rows[i]["Price"],
-                    Picname = (string)dt.Rows[i]["Picname"],
-                    Cid = (int)dt.Rows[i]["Cid"],
-                    Quantity = (int)dt.Rows[i]["Quantity"]
+                    Pid = Convert.ToInt32(dt.Rows[i]["Pid"]),
+                    Pname = dt.Rows[i]["Pname"].ToString(),
+                    Pdesc = dt.Rows[i]["Pdesc"].ToString(),
+                    Price = Convert.ToSingle(dt.Rows[i]["Price"]),
+                    Picname = dt.Rows[i]["Picname"].ToString(),
+                    Cid = Convert.ToInt32(dt.Rows[i]["Cid"]),
                 };
                 list.Add(tmp);
             }
@@ -70,7 +68,7 @@ namespace DAL
         public static int DeleteById(int Pid)
         {
             DbContext db = new DbContext();
-            string query = $"Delete FROM T.Product WHERE Pid = {Pid}";
+            string query = $"Delete FROM T_Product WHERE Pid = {Pid}";
             int i = db.ExecuteNonQuery(query);
             db.Close();
             return i;
