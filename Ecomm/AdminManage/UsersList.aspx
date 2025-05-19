@@ -1,42 +1,45 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminManage/AdminMaster.Master" AutoEventWireup="true" CodeBehind="ProductList.aspx.cs" Inherits="Ecomm.AdminManage.ProductList" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminManage/AdminMaster.Master" AutoEventWireup="true" CodeBehind="UsersList.aspx.cs" Inherits="Ecomm.AdminManage.UsersList" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link rel="stylesheet" href="css/dataTables.bootstrap4.css" />
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainCnt" runat="server">
-    <h1 class="mb-4">טבלת ניהול מוצרים</h1>
-    <a href="ProductAddEdit.aspx" class="btn btn-info mb-3">הוספת מוצר</a>
+    <h1 class="mb-4">טבלת ניהול משתמשים</h1>
+    <a href="UsersAddEdit.aspx" class="btn btn-info mb-3">הוספת משתמש</a>
 
     <div class="card shadow">
         <div class="card-body">
             <table class="table table-bordered table-striped table-hover" id="MainTbl">
                 <thead class="thead-light">
                     <tr>
-                        <th>קוד מוצר</th>
-                        <th>שם מוצר</th>
-                        <th>מחיר</th>
-                        <th>תמונה</th>
+                        <th>קוד משתמש</th>
+                        <th>שם משתמש</th>
+                        <th>מייל</th>
+                        <th>טלפון</th>
+                        <th>כתובת</th>
+                        <th>סטטוס</th>
                         <th>ניהול</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <asp:Repeater ID="RptProds" runat="server">
+                    <asp:Repeater ID="RptUsers" runat="server">
                         <ItemTemplate>
                             <tr>
-                                <td><%# Eval("Pid") %></td>
-                                <td><%# Eval("Pname") %></td>
-                                <td><%# Eval("Price") %></td>
-                                <td>
-                                    <img src="/uploads/prods/img/<%# Eval("Picname") %>" class="avatar-img rounded-circle" width="40" />
-                                </td>
+                                <td><%# Eval("Uid") %></td>
+                                <td><%# Eval("FullName") %></td>
+                                <td><%# Eval("Email") %></td>
+                                <td><%# Eval("Phone") %></td>
+                                <td><%# Eval("Adress") %></td>
+                               
+                                                                
                                 <td>
                                     <div class="dropdown">
                                         <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">
                                             פעולות
                                         </button>
-                                        <div class="dropdown-menu dropdown-menu-right">
-                                            <a class="dropdown-item" href="ProductAddEdit.aspx?Pid=<%# Eval("Pid") %>">עריכה</a>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item" href="UsersAddEdit.aspx?Uid=<%# Eval("Uid") %>">עריכה</a>
                                             <a class="dropdown-item text-danger" href="#">הסרה</a>
                                         </div>
                                     </div>

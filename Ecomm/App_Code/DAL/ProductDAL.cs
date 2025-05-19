@@ -83,22 +83,22 @@ namespace DAL
           
             if(tmp.Pid == -1)
             {
-                query = $"Insert into T_Product(Pname,Pdesc,Price,Picname,Status,Cid,Quantity)"; 
-                query +=$"    values(N'{tmp.Pname}',N'{tmp.Pdesc}',{tmp.Price},N'{tmp.Picname}',{tmp.Status},{tmp.Cid},{tmp.Quantity})";
+                query = $"Insert into T_Product(Pname,Pdesc,Price,Picname,Status,Cid)"; 
+                query +=$"    values(N'{tmp.Pname}',N'{tmp.Pdesc}',{tmp.Price},N'{tmp.Picname}',{tmp.Status},{tmp.Cid})";
             }
             else
             {
-                query = $"Update T_Product Set";
+                query = $"Update T_Product Set ";
                 query += $"Pname=N'{tmp.Pname}', ";
                 query += $"Pdesc=N'{tmp.Pdesc}', ";
-                query += $"Price={tmp.Price},";
-                query += $"Picname=N''{tmp.Picname},";
-                query += $"Status={tmp.Status},";
-                query += $"Cid={tmp.Cid},";
-                query += $"Quantity={tmp.Quantity},";
-                query += $"  Where Pid={tmp.Pid}";
+                query += $"Price={tmp.Price}, ";
+                query += $"Picname=N'{tmp.Picname}', ";
+                query += $"Status={tmp.Status}, ";
+                query += $"Cid={tmp.Cid} ";
+                query += $"Where Pid={tmp.Pid}";
+
             }
-            
+
             int i = Db.ExecuteNonQuery(query);
             if(tmp.Pid == -1)
             {

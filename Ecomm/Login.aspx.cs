@@ -27,7 +27,7 @@ namespace Ecomm
                 Email = "afek@gmail.com",
                 Pass = "123",
                 Phone = "123456789",
-                Address = "empty",
+                Adress = "empty",
                 Role = "admin"
             }; // create a new user
 
@@ -38,7 +38,7 @@ namespace Ecomm
                 Email = "afek@gmail.com",
                 Pass = "123",
                 Phone = "123456789",
-                Address = "empty",
+                Adress = "empty",
                 Role = "admin"
             }; // create a new user
 
@@ -49,7 +49,7 @@ namespace Ecomm
                 Email = "afek@gmail.com",
                 Pass = "123",
                 Phone = "123456789",
-                Address = "empty",
+                Adress = "empty",
                 Role = "admin"
             }; // create a new user
 
@@ -60,7 +60,7 @@ namespace Ecomm
                 Email = "afek@gmail.com",
                 Pass = "123",
                 Phone = "123456789",
-                Address = "empty",
+                Adress = "empty",
                 Role = "admin"
             }; // create a new user
 

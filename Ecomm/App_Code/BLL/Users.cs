@@ -13,7 +13,7 @@ namespace BLL
         public string Pass { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
-        public string Address { get; set; }
+        public string Adress { get; set; }
         public string Role { get; set; }
 
         public static Users GetById(int Uid)
@@ -23,7 +23,7 @@ namespace BLL
 
         public static List<Users> GetAll()
         {
-            return new List<Users>();
+            return UsersDAL.GetAll();
         }
 
         public int Save()

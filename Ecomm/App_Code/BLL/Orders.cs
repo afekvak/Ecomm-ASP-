@@ -21,7 +21,7 @@ namespace BLL
 
         public static List<Orders> GetAll()
         {
-            return new List<Orders>();
+            return OrdersDAL.GetAll();
         }
 
         public int Save()

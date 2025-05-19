@@ -96,7 +96,7 @@ namespace DAL
         public static Users GetById(int Uid)
         {
             DbContext db = new DbContext();
-            string query = $"SELECT * FROM T.Users WHERE Uid = {Uid}";
+            string query = $"SELECT * FROM T_Users WHERE Uid = {Uid}";
 
             DataTable dt = db.Execute(query);
 
@@ -105,13 +105,13 @@ namespace DAL
             {
                 temp = new Users()
                 {
-                    Uid = (int)dt.Rows[0]["Uid"],
+                    Uid = int.Parse(dt.Rows[0]["Uid"]+""),
                     FullName = (string)dt.Rows[0]["FullName"],
                     Pass = (string)dt.Rows[0]["Pass"],
                     Email = (string)dt.Rows[0]["Email"],
                     Phone = (string)dt.Rows[0]["Phone"],
-                    Address = (string)dt.Rows[0]["Address"],
-                    Role = (string)dt.Rows[0]["Role"],
+                    Adress = (string)dt.Rows[0]["Adress"],
+                    
 
                 };
 
@@ -125,20 +125,20 @@ namespace DAL
         public static List<Users> GetAll()
         {
             DbContext db = new DbContext();
-            string query = "SELECT * FROM T.Users";
+            string query = "SELECT * FROM T_Users";
             DataTable dt = db.Execute(query);
             List<Users> list = new List<Users>();
             for (int i = 0; i < dt.Rows.Count; i++)
             {
                 Users tmp = new Users()
                 {
-                    Uid = (int)dt.Rows[i]["Uid"],
+                    Uid = int.Parse(dt.Rows[i]["Uid"] +""),
                     FullName = (string)dt.Rows[i]["FullName"],
                     Pass = (string)dt.Rows[i]["Pass"],
                     Email = (string)dt.Rows[i]["Email"],
                     Phone = (string)dt.Rows[i]["Phone"],
-                    Address = (string)dt.Rows[i]["Address"],
-                    Role = (string)dt.Rows[i]["Role"],
+                    Adress = (string)dt.Rows[i]["Adress"],
+                   
                 };
                 list.Add(tmp);
             }
@@ -150,7 +150,7 @@ namespace DAL
         public static int DeleteById(int Uid)
         {
             DbContext db = new DbContext();
-            string query = $"Delete FROM T.Users WHERE Uid = {Uid}";
+            string query = $"Delete FROM T_Users WHERE Uid = {Uid}";
             int i = db.ExecuteNonQuery(query);
             db.Close();
             return i;
@@ -165,20 +165,20 @@ namespace DAL
 
             if (tmp.Uid == -1)
             {
-                query = $"Insert Into T.Users (FullName, Pass, Email, Phone, Address, Role) Values";
-                query += $"(N'{tmp.FullName}', N'{tmp.Pass}', N'{tmp.Email}', N'{tmp.Phone}', N'{tmp.Address}', N'{tmp.Role}')";
-
+                query = $"INSERT INTO T_Users (FullName, Pass, Email, Phone, Adress) " +
+                        $"VALUES (N'{tmp.FullName}', N'{tmp.Pass}', N'{tmp.Email}', N'{tmp.Phone}', N'{tmp.Adress}')";
             }
             else
             {
-                query = $"Update T.Users Set FullName=N'{tmp.FullName}', ";
-                query += $"Pass=N'{tmp.Pass}',";
-                query += $"Email=N'{tmp.Email}',";
-                query += $"Phone=N'{tmp.Phone}',";
-                query += $"Address=N'{tmp.Address}',";
-                query += $"Role=N'{tmp.Role}'";
-                query += $" Where Uid={tmp.Uid}";
+                query = $"UPDATE T_Users SET " +
+                        $"FullName=N'{tmp.FullName}', " +
+                        $"Pass=N'{tmp.Pass}', " +
+                        $"Email=N'{tmp.Email}', " +
+                        $"Phone=N'{tmp.Phone}', " +
+                        $"Adress=N'{tmp.Adress}' " +
+                        $"WHERE Uid={tmp.Uid}";
             }
+
 
             int i = Db.ExecuteNonQuery(query);
             if (tmp.Uid == -1)

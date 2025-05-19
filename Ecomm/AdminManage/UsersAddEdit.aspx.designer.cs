@@ -11,80 +11,53 @@ namespace Ecomm.AdminManage
 {
 
 
-    public partial class ProductAddEdit
+    public partial class UsersAddEdit
     {
 
         /// <summary>
-        /// TxtPname control.
+        /// TxtFullName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxtPname;
+        protected global::System.Web.UI.WebControls.TextBox TxtFullName;
 
         /// <summary>
-        /// TxtPrice control.
+        /// TxtEmail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxtPrice;
+        protected global::System.Web.UI.WebControls.TextBox TxtEmail;
 
         /// <summary>
-        /// TxtPdesc control.
+        /// HidUid control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxtPdesc;
+        protected global::System.Web.UI.WebControls.HiddenField HidUid;
 
         /// <summary>
-        /// DDLCategory control.
+        /// TxtPhone control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DDLCategory;
+        protected global::System.Web.UI.WebControls.TextBox TxtPhone;
 
         /// <summary>
-        /// UplPic control.
+        /// TxtAdress control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload UplPic;
-
-        /// <summary>
-        /// TxtPicname control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxtPicname;
-
-        /// <summary>
-        /// DDLStatus control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DDLStatus;
-
-        /// <summary>
-        /// HidPid control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField HidPid;
+        protected global::System.Web.UI.WebControls.TextBox TxtAdress;
 
         /// <summary>
         /// BtnSave control.

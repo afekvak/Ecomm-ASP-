@@ -12,6 +12,7 @@ namespace BLL
         public int Cid { get; set; }
         public string Cname { get; set; }
 
+        public int ParentCid { get; set; }
 
         public static Categories GetById(int Cid)
         {

@@ -95,6 +95,7 @@ namespace DAL
                 {
                     Cid = (int)dt.Rows[0]["Cid"],
                     Cname = (string)dt.Rows[0]["Cname"],
+                    ParentCid = (int)dt.Rows[0]["ParentCid"],
                 };
 
                 db.Close();
@@ -116,6 +117,7 @@ namespace DAL
                 {
                     Cid = (int)dt.Rows[i]["Cid"],
                     Cname = (string)dt.Rows[i]["Cname"],
+                    ParentCid = (int)dt.Rows[i]["ParentCid"],
                 };
                 list.Add(tmp);
             }
@@ -142,11 +144,11 @@ namespace DAL
 
             if (tmp.Cid == -1)
             {
-                query = $"Insert Into T_Category (Cname) Values (N'{tmp.Cname}')";
+                query = $"Insert Into T_Category (Cname,ParentCid) Values (N'{tmp.Cname}') , {tmp.ParentCid}";
             }
             else
             {
-                query = $"Update T_Category Set Cname = N'{tmp.Cname}' Where Cid = {tmp.Cid}";
+                query = $"Update T_Category Set Cname = N'{tmp.Cname}' , ParentCid = {tmp.ParentCid} Where Cid = {tmp.Cid}";
             }
 
             int i = Db.ExecuteNonQuery(query);

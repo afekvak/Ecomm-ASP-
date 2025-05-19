@@ -87,98 +87,101 @@ namespace DAL
         }
         */
 
-        public static Orders GetById(int Orderid)
+        public static Orders GetById(int OrderID)
         {
-            DbContext db = new DbContext();
-            string query = $"SELECT * FROM T.Orders WHERE OrderId = {Orderid}";
-
-            DataTable dt = db.Execute(query);
-
-            Orders temp = null;
-            if (dt.Rows.Count > 0)
+            DbContext Db = new DbContext();//יצירת אובייקט מסוג דאטה בייס
+            string sql = $"SELECT * FROM T_Orders Where OrderID={OrderID}";//שאילתא לשליפת הזמנה לפי קוד
+            DataTable Dt = Db.Execute(sql);//שליפת נתונים מהמסד
+            Orders Tmp = null;//יצירת אובייקט מסוג הזמנה
+            if (Dt.Rows.Count > 0)
             {
-                temp = new Orders()
+                Tmp = new Orders()//יצירת אובייקט מסוג הזמנה
                 {
-                    OrderId = (int)dt.Rows[0]["OrderId"],
-                    Uid = (int)dt.Rows[0]["Uid"],
-                    TotalPrice = (float)dt.Rows[0]["TotalPrice"],
-                    TotalAmount = (int)dt.Rows[0]["TotalAmount"],
-                    status = (string)dt.Rows[0]["status"],
+                    OrderId = int.Parse(Dt.Rows[0]["OrderId"] + " "),//קוד ההזמנה
+                    Uid = int.Parse(Dt.Rows[0]["Uid"] + " "),//קוד משתמש
+                    TotalPrice = Convert.ToSingle(Dt.Rows[0]["TotalPrice"]),//סכום כולל
+                    TotalAmount = Convert.ToInt32(Dt.Rows[0]["TotalAmount"]),//כמות כוללת
+                    status = (string)Dt.Rows[0]["status"],//סטטוס ההזמנה
                 };
-
-                db.Close();
-                return temp;
+                Db.Close();//סגירת החיבור לבסיס הנתונים
+                return Tmp;//מחזירה את האובייקט
             }
-            return new Orders();
+            return new Orders();//מחזירה אובייקט ריק במקרה ולא נמצא
         }
 
-
-        public static List<Orders> GetAll()
+        public static List<Orders> GetAll() // מחזירה את כל ההזמנות
         {
-            DbContext db = new DbContext();
-            string query = "SELECT * FROM T.Orders";
-            DataTable dt = db.Execute(query);
-            List<Orders> list = new List<Orders>();
-            for (int i = 0; i < dt.Rows.Count; i++)
+            DbContext Db = new DbContext();//יצירת אובייקט מסוג דאטה בייס
+            string sql = "SELECT * FROM T_Orders";//שאילתא לשליפת כל ההזמנות
+            DataTable Dt = Db.Execute(sql);//שליפת נתונים מהמסד
+            List<Orders> lst = new List<Orders>();//יצירת רשימה חדשה של הזמנות
+
+            //  בלולאה אנו מבצעים המרות כדי להתאים את סוגי הנתונים
+
+            for (int i = 0; i < Dt.Rows.Count; i++)
             {
-                Orders tmp = new Orders()
+                Orders Tmp = new Orders();//יצירת אובייקט מסוג הזמנה
+                Tmp = new Orders()//יצירת אובייקט מסוג הזמנה
                 {
-                    OrderId = (int)dt.Rows[i]["OrderId"],
-                    Uid = (int)dt.Rows[i]["Uid"],
-                    TotalPrice = (float)dt.Rows[i]["TotalPrice"],
-                    TotalAmount = (int)dt.Rows[i]["TotalAmount"],
-                    status = (string)dt.Rows[i]["status"],
+                    // ההמרה למספר שלם נועדה לשדות כמו קוד ההזמנה ומספר המשתמש, כיוון שהנתונים שמתקבלים מהטבלה
+                    // הם מסוג כללי ויש להמיר אותם למספרים שלמים לפני השמה למשתנה מתאים
+                    // ההמרה למספר עשרוני נועדה לשדות כמו סכום כולל וכמות כוללת, כיוון שהם אמורים להכיל ערכים עם נקודה עשרונית
+                    // ההמרה למחרוזת מבוצעת עבור שדות טקסטואליים כמו סטטוס, כדי לוודא שהמידע נשמר כמחרוזת תקינה
+                    // המרות אלו הכרחיות על מנת שנוכל לעבוד עם הנתונים בצורה תקינה בתוך התוכנית
+
+                    OrderId = Convert.ToInt32(Dt.Rows[i]["OrderId"]),//קוד ההזמנה
+                    Uid = Convert.ToInt32(Dt.Rows[i]["Uid"]),////קוד משתמש
+                    TotalPrice = Convert.ToSingle(Dt.Rows[i]["TotalPrice"]),//סכום כולל
+                    TotalAmount = Convert.ToInt32(Dt.Rows[i]["TotalAmount"]),//כמות כוללת
+                    status = Dt.Rows[i]["status"].ToString(),//סטטוס ההזמנה
+
                 };
-                list.Add(tmp);
+                lst.Add(Tmp);//הוספת האובייקט לרשימה
             }
-            db.Close();
-            return list;
+
+            Db.Close(); // סגירת החיבור לבסיס הנתונים
+            return lst;
         }
 
 
-        public static int DeleteById(int Orderid)
+        public static int Save(Orders Tmp)
         {
-            DbContext db = new DbContext();
-            string query = $"Delete FROM T.Orders WHERE OrderId = {Orderid}";
-            int i = db.ExecuteNonQuery(query);
-            db.Close();
-            return i;
-        }
+            DbContext Db = new DbContext(); //יצירת אובייקט מסוג דאטה בייס
+            string sql;//מחרוזת שאילתא
 
-
-        public static int Save(Orders tmp)
-        {
-            DbContext Db = new DbContext();
-
-            string query = $"";
-
-            if (tmp.OrderId == -1)
+            if (Tmp.OrderId == -1) //אם קוד ההזמנה שווה ל-1 אז מדובר בהזמנה חדשה
             {
-                query = $"Insert Into T.Orders (Uid, TotalPrice, TotalAmount, status) Values ";
-                query += $"(N'{tmp.Uid}',";
-                query += $"N'{tmp.TotalPrice}',";
-                query += $"N'{tmp.TotalAmount}',";
-                query += $"N'{tmp.status}')";
-
+                sql = $"INSERT INTO T_Orders(Uid, TotalPrice, TotalAmount, status)";//שאילתא להוספת הזמנה חדשה
+                sql += $" VALUES('{Tmp.Uid}', '{Tmp.TotalPrice}', '{Tmp.TotalAmount}', N'{Tmp.status}')";//מוסיפה את הערכים לשאילתא
             }
             else
             {
-                query = $"Update T.Orders Set ";
-                query += $"Uid=N'{tmp.Uid}',";
-                query += $"TotalPrice=N'{tmp.TotalPrice}',";
-                query += $"TotalAmount=N'{tmp.TotalAmount}',";
-                query += $"status=N'{tmp.status}'";
-                query += $" Where OrderId = {tmp.OrderId}";
+                sql = $"UPDATE T_Orders SET ";//שאילתא לעדכון הזמנה קיימת
+                sql += $"Uid = '{Tmp.Uid}', ";//מוסיפה את הערכים לשאילתא
+                sql += $"TotalPrice = '{Tmp.TotalPrice}', ";//מוסיפה את הערכים לשאילתא
+                sql += $"TotalAmount = '{Tmp.TotalAmount}', ";//מוסיפה את הערכים לשאילתא
+                sql += $"status = N'{Tmp.status}' ";//מוסיפה את הערכים לשאילתא
+                sql += $"WHERE OrderId = {Tmp.OrderId}";//מוסיפה את הערכים לשאילתא
             }
 
-            int i = Db.ExecuteNonQuery(query);
-            if (tmp.OrderId == -1)
+            int i = Db.ExecuteNonQuery(sql); //מחזירה מספר שורות שהוסרו מהמסד נתונים
+
+            if (Tmp.OrderId == -1) //אם קוד ההזמנה שווה ל-1 אז מדובר בהזמנה חדשה
             {
-                query = $"SELECT Max(OrderId) from T_Orders Where OrderId='{tmp.OrderId}'";
-                tmp.OrderId = (int)Db.ExecuteScalar(query);
+                sql = $"SELECT MAX(OrderId) FROM T_Orders WHERE Uid = {Tmp.Uid}";//שאילתא לשליפת קוד ההזמנה
+                Tmp.OrderId = (int)Db.ExecuteScalar(sql);//מחזירה את קוד ההזמנה
             }
-            Db.Close();
-            return i;
+            Db.Close(); //סגירת החיבור לבסיס הנתונים
+            return i; //מחזירה את מספר השורות שהוסרו מהמסד נתונים
+        }
+
+        public static int DeleteById(int OrderId)//מוחקת את ההזמנה לפי קוד
+        {
+            DbContext Db = new DbContext();//יצירת אובייקט מסוג דאטה בייס
+            string sql = $"DELETE FROM T_Orders Where OrderId={OrderId}";//שאילתא למחיקת הזמנה לפי קוד
+            int i = Db.ExecuteNonQuery(sql);//מחזירה מספר שורות שהוסרו מהמסד נתונים
+            Db.Close();//סגירת החיבור לבסיס הנתונים
+            return i;//מחזירה את מספר השורות שהוסרו מהמסד נתונים
         }
     }
 }

@@ -11,62 +11,35 @@ namespace Ecomm.AdminManage
 {
 
 
-    public partial class ProductAddEdit
+    public partial class OrdersAddEdit
     {
 
         /// <summary>
-        /// TxtPname control.
+        /// TxtUid control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxtPname;
+        protected global::System.Web.UI.WebControls.TextBox TxtUid;
 
         /// <summary>
-        /// TxtPrice control.
+        /// TxtTotalPrice control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxtPrice;
+        protected global::System.Web.UI.WebControls.TextBox TxtTotalPrice;
 
         /// <summary>
-        /// TxtPdesc control.
+        /// TxtTotalAmount control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxtPdesc;
-
-        /// <summary>
-        /// DDLCategory control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DDLCategory;
-
-        /// <summary>
-        /// UplPic control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload UplPic;
-
-        /// <summary>
-        /// TxtPicname control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxtPicname;
+        protected global::System.Web.UI.WebControls.TextBox TxtTotalAmount;
 
         /// <summary>
         /// DDLStatus control.
@@ -78,13 +51,13 @@ namespace Ecomm.AdminManage
         protected global::System.Web.UI.WebControls.DropDownList DDLStatus;
 
         /// <summary>
-        /// HidPid control.
+        /// HidOrderId control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField HidPid;
+        protected global::System.Web.UI.WebControls.HiddenField HidOrderId;
 
         /// <summary>
         /// BtnSave control.

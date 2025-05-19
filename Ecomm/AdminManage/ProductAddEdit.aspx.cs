@@ -35,6 +35,7 @@ namespace Ecomm.AdminManage
                     TxtPdesc.Text = p.Pdesc; // ממלא את תיאור המוצר
                     TxtPrice.Text = p.Price + ""; // ממלא את המחיר
                     TxtPicname.Text = p.Picname; // ממלא את שם הקובץ של התמונה
+                    DDLStatus.SelectedValue = p.Status + ""; // ממלא את הסטטוס של המוצר
                     HidPid.Value = p.Pid + ""; // שם את מזהה המוצר בשדה מוסתר
 
                     // אם הקטגוריה קיימת ברשימה, קובעת אותה כבחירה
@@ -48,6 +49,40 @@ namespace Ecomm.AdminManage
                     HidPid.Value = "-1"; // אם לא נמצא מוצר – נחשב כמוצר חדש
                 }
             }
+
+
+
+        }
+
+        protected void BtnSave_Click(object sender, EventArgs e)
+        {
+            string x = GlobFunc.randomString(8); // מייצרת מחרוזת אקראית באורך 8 תווים
+            string Picname = " "; // משתנה שיכיל את שם התמונה
+
+            if (UplPic.HasFile)
+            {
+                // יצירת שם קובץ רנדומלי עם סיומת מקורית (למשל .jpg)
+                string FileName = GlobFunc.randomString(6);// מייצרת שם קובץ אקראי באורך 8 תווים
+                int ind = UplPic.FileName.LastIndexOf('.');// מחפש את האינדקס של הנקודה האחרונה בשם הקובץ
+                string Ext = UplPic.FileName.Substring(ind); // לדוגמה: ".jpg"
+                Picname = FileName + Ext;
+                UplPic.SaveAs(Server.MapPath("/uploads/prods/img/") + Picname); // שמירת הקובץ לתיקייה בשרת
+                TxtPicname.Text = Picname; // ממלא את שם הקובץ בתיבת הטקסט
+
+            }
+            Product p = new Product() // יצירת אובייקט חדש של מוצר
+            {
+                Pid = int.Parse(HidPid.Value), // מזהה המוצר
+                Pname = TxtPname.Text, // שם המוצר
+                Pdesc = TxtPdesc.Text, // תיאור המוצר
+                Price = float.Parse(TxtPrice.Text), // מחיר המוצר
+                Picname = TxtPicname.Text, // שם התמונה
+                Cid = int.Parse(DDLCategory.SelectedValue), // מזהה הקטגוריה
+                Status = DDLStatus.SelectedValue // סטטוס המוצר
+
+            };
+            p.Save(); // שומר את המוצר במסד הנתונים
+            Response.Redirect("ProductList.aspx"); // מפנה את המשתמש לרשימת המוצרים
         }
     }
 }
